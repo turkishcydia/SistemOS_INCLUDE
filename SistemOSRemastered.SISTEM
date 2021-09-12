@@ -1,41 +1,54 @@
 SET menu=cmdmenusel
+set yazdir=Echo.
+set ekapat=Echo off
+set date=tarih
+set bekle=pause
+set baslik=title
+set temizle=cls
+set renk=color
+set git=goto
+set belirle=set /p
+set eger=if
+set kapat=exit
+set zaman=timeout /t
+set gizle=nul
 
 :HElo
 color 0
-cls
-@Echo off
+%temizle%
+%ekapat%
 TITLE SistemOS Lite (Remastered)
-if not exist PROFILE/profile.SYS goto IlkKullanim
-if not exist boot/DRV goto error
-cls
-cmdmenusel 0ff0 "Baslat"  "Yeniden Baslat"
-if %errorlevel%==1 goto Ana
-if %errorlevel%==2 goto HElo
-pause
+if not exist PROFILE/profile.SYS %git% IlkKullanim
+if not exist boot/DRV %git% error
+%temizle%
+%menu% 0ff0 "Baslat"  "Yeniden Baslat"
+if %errorlevel%==1 %git% Ana
+if %errorlevel%==2 %git% HElo
+%bekle%
 
 
 :Ana
-cls
+%temizle%
 insertbmp /p:bmp\booting.bmp /x:178 /y:0
 timeout /t 5 >nul
-cls
+%temizle%
 insertbmp /p:bmp\booted.bmp /x:178 /y:0
 timeout /t 2 >nul
-goto AnaMenu
+%git% AnaMenu
 
 :AnaMenu
 mode con:cols=150 lines=50
-cls
-cmdmenusel 0ff0 "Ayarlar" "" "Google Chrome" "" "Eba (Yalniz Google ile calisir)" "" "Muzik" "" "Disk Denetleyici" "" "Dosya Yoneticisi" "" "Komutlar" "" "" "Kapat"
-if %errorlevel%==1 goto ayar
-if %errorlevel%== 3 goto googlechrome
-if %errorlevel%==5 goto eba
-if %errorlevel%== 7 goto muzik
-if %errorlevel%== 9 goto chkdsk
-if %errorlevel%==11 goto Dosya_Yoneticisi
-if %errorlevel%== 13 goto komutlar
-if %errorlevel%==15 goto kapat
-cls
+%temizle%
+%menu% 0ff0 "Ayarlar" "" "Google Chrome" "" "Eba (Yalniz Google ile calisir)" "" "Muzik" "" "Disk Denetleyici" "" "Dosya Yoneticisi" "" "Komutlar" "" "" "Kapat"
+if %errorlevel%==1 %git% ayar
+if %errorlevel%== 3 %git% googlechrome
+if %errorlevel%==5 %git% eba
+if %errorlevel%== 7 %git% muzik
+if %errorlevel%== 9 %git% chkdsk
+if %errorlevel%==11 %git% Dosya_Yoneticisi
+if %errorlevel%== 13 %git% komutlar
+if %errorlevel%==15 %git% kapat
+%temizle%
 Echo. HATA!
 timeout /t 3 >nul
 start memorydump
@@ -43,38 +56,38 @@ exit
 
 
 :IlkKullanim
-cls 
+%temizle% 
 Echo. SistemOS Lite Ilk kullanim icin hazirlaniyor... Lutfen bekleyin.
 timeout /t 5 >nul
-goto ProfilYap
+%git% ProfilYap
 
 :komutlar
-cls
+%temizle%
 dir boot\komutlar
 Echo.
 Echo.
 Echo. Baslatmak istediginiz komudun dosya adini giriniz.
 set /p komutac=
-if %komutac%== %key% goto ac1
+if %komutac%== %key% %git% ac1
 
 :ac1
-cls
+%temizle%
 ren boot\komutlar\%komutac%.komut %komutac%.bat
 timeout /t 2 >nul
 start boot\komutlar\%komutac%.bat
 timeout /t 2 >nul
 ren boot\komutlar\%komutac%.bat %komutac%.komut
-goto komutlar
+%git% komutlar
 
 
 
 :googlechrome
-cls
+%temizle%
 start chrome.exe
-goto AnaMenu
+%git% AnaMenu
 
 :error
-cls 
+%temizle% 
 Echo. Sistem duzgun bir sekilde baslatilamadi
 Echo.
 Echo. Hata Nedeni = Not exist DRV file
@@ -83,16 +96,16 @@ Echo. Hata Nedeni = Not exist DRV file >bmp/KERNEL_HATASI.LOG
 cd boot
 md DRV
 Echo.
-pause >nul
+%bekle% >nul
 start memorydump
 exit
 
 :ProfilYap 
-cls
+%temizle%
 Echo. Profil olusturucusuna hosgeldiniz! Lutfen Bosluk ve Ozel harf olmadan isminizi veya nickinizi girin.
 set /p isim= 
-if %isim%== %isim% goto chk
-cls
+if %isim%== %isim% %git% chk
+%temizle%
 
 
 
@@ -103,70 +116,70 @@ Echo. %isim% >profile.SYS
 copy profile.sys PROFILE
 del profile.sys
 start boot\recovery\intro.mp4
-goto AnaMenu
+%git% AnaMenu
 
 :Dosya_Yoneticisi
-cls
+%temizle%
 start boot/PROGRAMS/FileExplorer/FreeCommander.exe
-goto AnaMenu
+%git% AnaMenu
 
 :eba
 start chrome www.eba.gov.tr
-goto AnaMenu
+%git% AnaMenu
 
 
 :ayar
-cls
-cmdmenusel 0ff0 "SistemOS Yedekleme" "" "Windows Yedek" "" "Yedek Sil (Windows)" "" "Hakkýnda" "" "Geri Git"
-if %errorlevel%==1 goto SistemYEDEK
-if %errorlevel%== 3 goto WinYEDEK
-if %errorlevel%==5 goto Win
-if %errorlevel%==7 goto hakkinda
-if %errorlevel%==9 goto AnaMenu
-pause >nul
-goto AnaMenu
+%temizle%
+%menu% 0ff0 "SistemOS Yedekleme" "" "Windows Yedek" "" "Yedek Sil (Windows)" "" "Hakkýnda" "" "Geri Git"
+if %errorlevel%==1 %git% SistemYEDEK
+if %errorlevel%== 3 %git% WinYEDEK
+if %errorlevel%==5 %git% Win
+if %errorlevel%==7 %git% hakkinda
+if %errorlevel%==9 %git% AnaMenu
+%bekle% >nul
+%git% AnaMenu
 
 :hakkinda
-cls
+%temizle%
 start boot/commands/about.bat
 exit 
 
 :hatakomutu
-cls
+%temizle%
 start memorydump.bat
 exit
 
 :Win
-cls
+%temizle%
 cd C:\Users\%username%\
 del YedeklerOS
 exit
 
 :kapat
-cls
+%temizle%
 Echo. Kapatiliyor.
 timeout /t 1 >nul
-cls
+%temizle%
 Echo. Kapatiliyor.
 timeout /t 1 >nul
-cls 
+%temizle% 
 Echo. Kapatiliyor..
 timeout /t 1 >nul
-cls
+%temizle%
 Echo. Kapatiliyor...
 timeout /t 1 >nul
-cls 
+%temizle% 
 exit
 
 :WinYEDEK
-cls
+%temizle%
 Echo. Baslamak Icin "E" tusuna basin...
 set /p yedek=
-if %yedek%== e goto basla
-if %yedek%== E goto basla
+if %yedek%== e %git% basla
+if %yedek%== E %git% basla
 
 :basla
-cls
+%temizle%
 cd boot
 cd DRV
 copy Backup.bat C:\Users\%username%\yedek.bat
@@ -174,23 +187,23 @@ start C:\Users\%username%\yedek.bat
 exit
 
 :SistemYEDEK
-cls
+%temizle%
 cd boot
 cd DRV
 start SystemBackup.bat
 exit
 
 :muzik
-cls
+%temizle%
 Echo. %appdata%/SYSRe/muzik Konumuna muzik attiktan sonra attigin muzik dosyasinin ismini girmen yeterlidir.
 Echo.
 set /p muzikac=
-if %muzikac%== %key% goto ac
+if %muzikac%== %key% %git% ac
 
 
 :ac
-cls
+%temizle%
 Echo. %muzikac% adli muzik acilmistir. Devam etmek icin herhangi tusa basin...
 start muzik\%muzikac%.mp3
-pause
-goto AnaMenu
+%bekle%
+%git% AnaMenu
