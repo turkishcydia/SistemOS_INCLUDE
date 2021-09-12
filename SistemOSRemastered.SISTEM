@@ -29,11 +29,25 @@ if %errorlevel%==2 %git% HElo
 
 :Ana
 %temizle%
-insertbmp /p:bmp\booting.bmp /x:178 /y:0
-timeout /t 5 >nul
+%yazdir% Sistem dosyalar? kontrol ediliyor.
+%zaman% 1 >nul
 %temizle%
-insertbmp /p:bmp\booted.bmp /x:178 /y:0
-timeout /t 2 >nul
+%yazdir% Sistem dosyalar? kontrol ediliyor..
+%zaman% 1 >nul
+%temizle%
+%yazdir% Sistem dosyalar? kontrol ediliyor...
+%zaman% 1 >nul
+%temizle%
+%yazdir% Sistem dosyalar? kontrol ediliyor..
+%zaman% 1 >nul
+%temizle%
+%yazdir% Sistem dosyalar? kontrol ediliyor.
+%zaman% 1 >nul
+%temizle%
+%yazdir% Sistem dosyalar? kontrol ediliyor..
+%zaman% 1 >nul
+%temizle%
+%yazdir% Sistem dosyalar? kontrol ediliyor...
 %git% AnaMenu
 
 :AnaMenu
@@ -57,7 +71,7 @@ exit
 
 :IlkKullanim
 %temizle% 
-Echo. SistemOS Lite Ilk kullanim icin hazirlaniyor... Lutfen bekleyin.
+Echo. SistemOS ilk kullan?m i≈in haz?rlan?yor... L?tfen bekleyin.
 timeout /t 5 >nul
 %git% ProfilYap
 
@@ -66,7 +80,7 @@ timeout /t 5 >nul
 dir boot\komutlar
 Echo.
 Echo.
-Echo. Baslatmak istediginiz komudun dosya adini giriniz.
+Echo. BaYlatmak istediıiniz komudun dosya ad?n? giriniz.
 set /p komutac=
 if %komutac%== %key% %git% ac1
 
@@ -102,7 +116,7 @@ exit
 
 :ProfilYap 
 %temizle%
-Echo. Profil olusturucusuna hosgeldiniz! Lutfen Bosluk ve Ozel harf olmadan isminizi veya nickinizi girin.
+Echo. Profil oluYturucusuna hoYgeldiniz! L?tfen BoYluk ve tzel harf olmadan isminizi veya nickinizi girin.
 set /p isim= 
 if %isim%== %isim% %git% chk
 %temizle%
@@ -130,7 +144,7 @@ start chrome www.eba.gov.tr
 
 :ayar
 %temizle%
-%menu% 0ff0 "SistemOS Yedekleme" "" "Windows Yedek" "" "Yedek Sil (Windows)" "" "Hakk√Ωnda" "" "Geri Git"
+%menu% 0ff0 "SistemOS Yedekleme" "" "Windows Yedek" "" "Yedek Sil (Windows)" "" "Hakk?nda" "" "Geri Git"
 if %errorlevel%==1 %git% SistemYEDEK
 if %errorlevel%== 3 %git% WinYEDEK
 if %errorlevel%==5 %git% Win
@@ -173,7 +187,7 @@ exit
 
 :WinYEDEK
 %temizle%
-Echo. Baslamak Icin "E" tusuna basin...
+Echo. BaYlamak i≈in "E" tuYuna bas?n...
 set /p yedek=
 if %yedek%== e %git% basla
 if %yedek%== E %git% basla
@@ -195,7 +209,7 @@ exit
 
 :muzik
 %temizle%
-Echo. %appdata%/SYSRe/muzik Konumuna muzik attiktan sonra attigin muzik dosyasinin ismini girmen yeterlidir.
+Echo. muzik Konumuna m?zik att?ktan sonra att?ı?n muzik dosyas?n?n ismini girmen yeterlidir.
 Echo.
 set /p muzikac=
 if %muzikac%== %key% %git% ac
@@ -203,7 +217,7 @@ if %muzikac%== %key% %git% ac
 
 :ac
 %temizle%
-Echo. %muzikac% adli muzik acilmistir. Devam etmek icin herhangi tusa basin...
+Echo. %muzikac% adl? m?zik a≈?lm?Yt?r. Devam etmek i≈in herhangi tuYa bas?n...
 start muzik\%muzikac%.mp3
 %bekle%
 %git% AnaMenu
